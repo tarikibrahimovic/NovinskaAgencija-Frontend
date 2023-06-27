@@ -1,0 +1,50 @@
+<div [class]="'main'">
+  <div [class]="'loginContainer'">
+    <h1>Login</h1>
+    <h3 [class]="'error'" [hidden]="!error">
+      Something went wrong please try again!
+    </h3>
+    <div [class]="'line'"></div>
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <div [class]="'inputContainer'">
+        <label for="email">Email</label>
+        <div [class]="'passwordSection'">
+          <input
+            id="email"
+            type="text"
+            formControlName="email"
+            placeholder="Email"
+            [class]="'inputi'"
+          />
+        </div>
+      </div>
+      <div [class]="'inputContainer'">
+        <label for="password">Password</label>
+        <div [class]="'passwordSection'">
+          <input
+            id="password"
+            [type]="passwordVisible ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Password"
+            [class]="'inputi'"
+          />
+          <mat-icon
+            [class]="'icon'"
+            (click)="passwordVisible = !passwordVisible"
+            >{{ passwordVisible ? "visibility" : "visibility_off" }}</mat-icon
+          >
+        </div>
+      </div>
+      <div [class]="'servicesContainer'">
+        <h5 [class]="'services'" (click)="signUp()">
+          Do not have Account? SignUp
+        </h5>
+        <button mat-button [class]="'submitButton'" (click)="login()">
+          Login
+        </button>
+        <h5 [class]="'services'" (click)="forgotPassword()">Forgot Password?</h5>
+      </div>
+    </form>
+    <div [class]="'line'"></div>
+  </div>
+</div>

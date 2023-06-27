@@ -1,0 +1,54 @@
+<main>
+  <div [class]="'heroContainer'">
+    <img src="../../assets/heroImg.jpeg" [class]="'heroImg'" alt="" />
+    <div [class]="'overlaySection'">
+      <h2>Welcome to Newsly!</h2>
+      <p>
+        Here you can find, post and buy the latest news from all over the world!
+      </p>
+      <button [class]="'seeMore'" (click)="scroll()">See More</button>
+    </div>
+  </div>
+  <div [class]="'aboutContainer2'">
+    <div [class]="'aboutSection'">
+      <img
+        alt="We provide high quality services"
+        src="https://images.unsplash.com/photo-1587135991058-8816b028691f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wyNjI5NjF8MHwxfHNlYXJjaHwyMnx8V3JpdGluZ3xlbnwwfHx8fDE2ODc2OTExNzR8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+        decoding="async"
+        data-nimg="fill"
+        [class]="'aboutImg'"
+      />
+    </div>
+    <div [class]="'aboutSection'">
+      <h2 style="color: black;">Our Mission</h2>
+      <p>
+        Our mission is to provide a platform where people can find the latest
+        news from all over the world and also post their own news and sell them
+        to other users.
+      </p>
+    </div>
+  </div>
+  <div [class]="'aboutContainer'">
+    <div [class]="'aboutSection'">
+      <h2>About Us</h2>
+      <p>
+        Newsly is a news website where you can find the latest news from all
+        over the world. You can also post your own news and sell them to other
+        users.
+      </p>
+    </div>
+    <div [class]="'abouteSection'">
+      <img
+        alt="Copywriting Services"
+        src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wyNjI5NjF8MHwxfHNlYXJjaHw4fHxXcml0aW5nfGVufDB8fHx8MTY4NzY5MTE3NHww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+        decoding="async"
+        data-nimg="fill"
+        [class]="'aboutImg'"
+      />
+    </div>
+  </div>
+  <div [class]="'articlesSection'">
+    <h2 [class]="'articlesSectionText'" style="color: black;">See Our Articles!</h2>
+    <button [class]="'seeMore'" (click)="scroll()">See More</button>
+  </div>
+</main>

@@ -1,0 +1,31 @@
+<div [class]="'main'">
+  <div [class]="'loginContainer'">
+    <h1>Verify your account</h1>
+    <h3 *ngIf="message" [class]="'message'">{{message}}</h3>
+    <h3 [class]="'error'" [hidden]="!error">
+      Something went wrong please try again!
+    </h3>
+    <div [class]="'line'"></div>
+    <form [formGroup]="form">
+      <div [class]="'inputContainer'">
+        <label for="token">Verification Token</label>
+        <div [class]="'passwordSection'">
+          <input
+            id="token"
+            type="text"
+            formControlName="token"
+            placeholder="Verification Token"
+            [class]="'inputi'"
+          />
+          <button [class]="'emailButton'" (click)="resend()">
+            {{countdown}}
+          </button>
+        </div>
+      </div>
+      <button mat-button [class]="'submitButton'" (click)="verify()">
+        Verify
+      </button>
+    </form>
+    <div [class]="'line'"></div>
+  </div>
+</div>

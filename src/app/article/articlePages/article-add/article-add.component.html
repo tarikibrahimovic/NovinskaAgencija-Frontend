@@ -1,0 +1,96 @@
+<main [ngClass]="isLoading ? 'main2' : 'main'">
+  <div class="" *ngIf="!isLoading">
+    <div [class]="'mainSection'">
+      <h1 [class]="'mainNaslov'">Add Article!</h1>
+      <p [class]="'mainParagraf'">Feel free to add article you want!</p>
+    </div>
+    <div [class]="'line'"></div>
+    <form action="" [formGroup]="forms" [class]="'content'">
+      <div [class]="'left'">
+        <div [class]="'inputRow'">
+          <label for="title" [class]="'label'">Title</label>
+          <mat-form-field [class]="'input'">
+            <mat-label>Title</mat-label>
+            <input
+              type="text"
+              id="title"
+              matInput
+              formControlName="title"
+              placeholder="Title like: The biggest thing ever just happened"
+            />
+          </mat-form-field>
+        </div>
+        <div [class]="'inputRow'">
+          <label for="contnet" [class]="'label'">Content</label>
+          <mat-form-field [class]="'input'">
+            <mat-label>Content</mat-label>
+            <input
+              type="text"
+              id="content"
+              matInput
+              formControlName="content"
+              placeholder="Content like: The biggest thing ever just happened"
+            />
+          </mat-form-field>
+        </div>
+        <div [class]="'inputRow'">
+          <label for="price" [class]="'label'">Price</label>
+          <mat-form-field [class]="'input'">
+            <mat-label>Price</mat-label>
+            <input
+              type="number"
+              id="price"
+              matInput
+              formControlName="price"
+              placeholder="Price like: 1000$"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div [class]="'right'">
+        <div [class]="'inputRow'">
+          <label for="category" [class]="'label'">Category</label>
+          <mat-form-field>
+            <mat-label>Choose an option</mat-label>
+            <mat-select [formControl]="forms.controls.category">
+              <mat-option value="1">Politics</mat-option>
+              <mat-option value="2">Entertainment</mat-option>
+              <mat-option value="3">Business</mat-option>
+              <mat-option value="4">Sports</mat-option>
+              <mat-option value="5">Crime</mat-option>
+              <mat-option value="6">Education</mat-option>
+              <mat-option value="7">City Council News</mat-option>
+              <mat-option value="8">Tech</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div [class]="'inputRow'">
+          <label for="image" [class]="'label'">Image</label>
+          <input
+            type="file"
+            id="image"
+            formControlName="image"
+            style="background-color: #e6e6e6"
+            (change)="onImageChange($event)"
+            enctype="multipart/form-data"
+          />
+        </div>
+        <div [class]="'inputRow'">
+          <label for="file" [class]="'label'">Pdf or .docx</label>
+          <input
+            type="file"
+            id="file"
+            formControlName="file"
+            style="background-color: #e6e6e6"
+            (change)="onFileChange($event)"
+            enctype="multipart/form-data"
+          />
+        </div>
+      </div>
+    </form>
+    <div [class]="'buttonRow'">
+      <button (click)="proba()" [class]="'seeMore'">Upload</button>
+    </div>
+  </div>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+</main>

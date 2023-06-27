@@ -1,0 +1,81 @@
+.main {
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainNaslov {
+  margin: 3% 0;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.line {
+  width: 100%;
+  height: 3px;
+  background-color: black;
+  margin: 20px 0;
+}
+
+.forma {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20% 0;
+}
+
+.seeMore {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  background-color: #0e4f8b;
+  color: #fff;
+  cursor: pointer;
+}
+
+.mainNaslov1 {
+  margin: 3% 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.input{
+    width: 70%;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+label{
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+@media (max-width:430px){
+    .mainNaslov{
+        font-size: 3rem;
+    }
+    .mainNaslov1{
+        font-size: 1.5rem;
+    }
+    .forma{
+        margin: 50% 0;
+    }
+    .input{
+        width: 100%;
+        padding: 1rem 0;
+    }
+}

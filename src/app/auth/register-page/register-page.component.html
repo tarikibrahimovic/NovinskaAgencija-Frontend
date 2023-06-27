@@ -1,0 +1,157 @@
+<div [class]="'main'">
+  <div [class]="'loginContainer'">
+    <h1>Register</h1>
+    <h3 [class]="'error'" [hidden]="!error">Something went wrong! Try Again!</h3>
+    <div [class]="'line'"></div>
+    <form [formGroup]="form" (ngSubmit)="signup()">
+      <div [class]="'inputContainer'">
+        <label for="username">Username</label>
+        <div [class]="'passwordSection'">
+          <input
+            id="username"
+            type="text"
+            formControlName="username"
+            placeholder="Username"
+            [class]="'inputi'"
+          />
+        </div>
+      </div>
+      <div [class]="'inputContainer'">
+        <label for="email">Email</label>
+        <div [class]="'passwordSection'">
+          <input
+            id="email"
+            type="text"
+            formControlName="email"
+            placeholder="Email"
+            [class]="'inputi'"
+          />
+        </div>
+      </div>
+      <div [class]="'inputContainer'">
+        <label for="password1">Password</label>
+        <div [class]="'passwordSection'">
+          <input
+            id="password1"
+            [type]="passwordVisible1 ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Password"
+            [class]="'inputi'"
+          />
+          <mat-icon
+            [class]="'icon'"
+            (click)="passwordVisible1 = !passwordVisible1"
+            >{{ passwordVisible1 ? "visibility" : "visibility_off" }}</mat-icon
+          >
+        </div>
+      </div>
+      <div [class]="'inputContainer'">
+        <label for="password2">Confirm Password</label>
+        <div [class]="'passwordSection'">
+          <input
+            id="password2"
+            [type]="passwordVisible2 ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            placeholder="Password"
+            [class]="'inputi'"
+          />
+          <mat-icon
+            [class]="'icon'"
+            (click)="passwordVisible2 = !passwordVisible2"
+            >{{ passwordVisible2 ? "visibility" : "visibility_off" }}</mat-icon
+          >
+        </div>
+      </div>
+      <div [class]="'inputContainer'">
+        <label for="state">State Of Origin</label>
+        <div [class]="'passwordSection'">
+          <input
+            id="state"
+            type="text"
+            formControlName="stateOfOrigin"
+            placeholder="State Of Origin"
+            [class]="'inputi'"
+          />
+        </div>
+      </div>
+      <div [class]="'inputContainer'">
+        <label for="account">Jurassic Account</label>
+        <div [class]="'passwordSection'">
+          <input
+            id="email"
+            type="text"
+            formControlName="jurassicAccount"
+            placeholder="Jurassic Account"
+            [class]="'inputi'"
+          />
+        </div>
+      </div>
+      <div [class]="'inputContainer'">
+          <label for="tip">Tip</label>
+          <mat-form-field>
+            <mat-label>Choose an option</mat-label>
+            <select matNativeControl formControlName="tip" id="tip">
+              <option value="reporter">Reporter</option>
+              <option value="klijent">Klijent</option>
+            </select>
+          </mat-form-field>
+      </div>
+      <div *ngIf="showOtherInputs" >
+        <div [class]="'inputContainer'">
+            <label for="ime">First Name</label>
+            <div [class]="'passwordSection'">
+              <input
+                id="ime"
+                type="text"
+                formControlName="firstName"
+                placeholder="First Name"
+                [class]="'inputi'"
+              />
+            </div>
+          </div>
+          <div [class]="'inputContainer'">
+            <label for="prezime">Last Name</label>
+            <div [class]="'passwordSection'">
+              <input
+                id="prezime"
+                type="text"
+                formControlName="lastName"
+                placeholder="Last Name"
+                [class]="'inputi'"
+              />
+            </div>
+          </div>
+      </div>
+      <div *ngIf="!showOtherInputs">
+        <div [class]="'inputContainer'">
+            <label for="nazivKompanije">Company Name</label>
+            <div [class]="'passwordSection'">
+              <input
+                id="nazivKompanije"
+                type="text"
+                formControlName="nazivKompanije"
+                placeholder="Company Name"
+                [class]="'inputi'"
+              />
+            </div>
+          </div>
+          <div [class]="'inputContainer'">
+            <label for="tipPreduzeca">Type of Company</label>
+            <div [class]="'passwordSection'">
+              <input
+                id="tipPreduzeca"
+                type="text"
+                formControlName="tipPreduzeca"
+                placeholder="Type of Company"
+                [class]="'inputi'"
+              />
+            </div>
+          </div>
+      </div>
+    </form>
+    <button mat-button [class]="'submitButton'" (click)="signup()">
+        Sign Up
+      </button>
+    <div [class]="'line'"></div>
+  </div>
+</div>

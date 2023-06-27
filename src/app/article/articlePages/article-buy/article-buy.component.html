@@ -1,0 +1,28 @@
+<main class="main">
+  <div *ngIf="!isLoading else proba">
+    <h1 [class]="'mainNaslov'">Buy articles!</h1>
+    <div class="line"></div>
+    <h1 class="mainNaslov1" style="color: red" *ngIf="error">{{ error }}</h1>
+    <h1 [class]="'mainNaslov1'">
+      Thank you for buying this article from Newsly!
+    </h1>
+    <p></p>
+    <form action="" [formGroup]="forms" class="forma">
+      <label for="account">Jurassic Account</label>
+      <mat-form-field [class]="'input'">
+        <mat-label>Jurassic Account</mat-label>
+        <input
+          type="account"
+          id="text"
+          matInput
+          formControlName="jurassicAccount"
+          placeholder="Like: 1111-1111-1111..."
+        />
+      </mat-form-field>
+      <button class="seeMore" (click)="buy()">Buy Article</button>
+    </form>
+  </div>
+    <ng-template #proba>
+        <mat-spinner></mat-spinner>
+    </ng-template>
+</main>

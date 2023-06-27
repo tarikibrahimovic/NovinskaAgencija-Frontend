@@ -1,0 +1,75 @@
+<main>
+  <div [class]="'navbar'" *ngIf="showNavbar">
+    <div [class]="'logoPart'">
+      <img src="../assets/NewslyLogo.png" alt="slika" [class]="'image'" />
+      <h1 [class]="'logoText'">Newsly</h1>
+      <div [class]="'linkContainer'">
+        <a
+          routerLink="/"
+          routerLinkActive="active-link"
+          [class]="'link'"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
+        <a
+          routerLink="article"
+          routerLinkActive="active-link"
+          [class]="'link'"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Article</a
+        >
+      </div>
+    </div>
+    <div class="" *ngIf="service.getLoginStatus() | async">
+      <button
+        mat-button
+        [matMenuTriggerFor]="menu"
+        [class]="'dropdown'"
+        style="color: #fff"
+      >
+        Profile
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Log Out</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+    </div>
+    <div *ngIf="!(service.getLoginStatus() | async)">
+      <button
+        mat-button
+        [class]="'authButtons'"
+        routerLink="login"
+        routerLinkActive="active"
+        style="color: #fff"
+      >
+        Log in
+      </button>
+      <button
+        mat-button
+        [class]="'authButtons'"
+        routerLink="register"
+        routerLinkActive="active"
+        style="color: #fff"
+      >
+        Sign Up
+      </button>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  <footer *ngIf="showNavbar">
+    <div [class]="'footerContainer'">
+      <div [class]="'footerSection'">
+        <img src="../assets/NewslyLogo.png" [class]="'footerImg'" alt="">
+        <h2>Newsly</h2>
+      </div>
+      <div [class]="'footerSection'">
+        <h2>About Us</h2>
+        <p>
+          Newsly is a news website where you can find the latest news from all
+          over the world. You can also post your own news and sell them to other
+          users.
+        </p>
+      </div>
+    </div>
+  </footer>
+</main>

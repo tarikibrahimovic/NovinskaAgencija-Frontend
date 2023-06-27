@@ -1,0 +1,63 @@
+<main [class]="'main'">
+  <div [class]="'mainSection'">
+    <h1 [class]="'mainNaslov'">Our Articles!</h1>
+    <p [class]="'mainParagraf'">
+      Feel free to browse and filter on articles you want!
+    </p>
+  </div>
+  <div [class]="'content'">
+    <mat-toolbar [class]="'toolbar'">
+      <span>Articles</span>
+      <span class="example-spacer"></span>
+      <button [class]="'seeMore'" (click)="addPage()" *ngIf="role == 0">
+        Add Article
+      </button>
+          <mat-form-field>
+            <mat-label>Choose an option</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let reporter of reporters" [value]="reporter.id" (onSelectionChange)="changeReporter(reporter.id)">{{reporter.ime}} {{reporter.prezime}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </mat-toolbar>
+
+    <div [class]="'sorting'">
+      <button (click)="sort('all')">All</button>
+      <button *ngFor="let i of categories" (click)="sort(i.value)">
+        {{ i.viewValue }}
+      </button>
+    </div>
+    <div class="content">
+      <div *ngIf="filteredArticles.length > 0; else prazno">
+        <mat-card class="example-card" *ngFor="let article of filteredArticles">
+          <mat-card-header>
+            <mat-card-title>{{article.title}}</mat-card-title>
+            <mat-card-subtitle>{{article.ime}} {{article.prezime}}</mat-card-subtitle>
+          </mat-card-header>
+          <img
+            mat-card-image
+            [src]="
+              article.imageUrl.length > 0
+                ? article.imageUrl
+                : 'https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg'
+            "
+            alt="picture"
+            [class]="'image'"
+          />
+          <mat-card-content>
+            <p>
+              {{ longText.substring(0, 100) }}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button (click)="linkIt(article.id)">See More</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>  
+      <ng-template #prazno>
+        <div [class]="'prazno'">
+          <h1>No articles found!</h1>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</main>
