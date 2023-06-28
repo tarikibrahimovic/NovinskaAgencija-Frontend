@@ -1,0 +1,147 @@
+<main class="main">
+  <div *ngIf="!isLoading else loading">
+    <div class="infoContainer">
+      <div class="imageContainer">
+        <img
+          [src]="
+            service.user.imageUrl
+              ? service.user.imageUrl
+              : 'assets/default-profle.jpeg'
+          "
+          alt="profile image"
+          class="profileImage"
+          (click)="openDialog('0ms', '0ms')"
+        />
+        <div *ngIf="service.user.imageUrl">
+            <button class="seeMore" (click)="deleteImage()">
+              Delete image
+            </button>
+        </div>
+      </div>
+      <div class="contentContainer">
+        <h1 class="mainNaslov">{{ username }}</h1>
+        <p class="contentParagraf">
+          {{ service.user.ime }} {{ service.user.prezime }}
+        </p>
+        <div class="line"></div>
+        <p class="contentParagraf">Email: {{ service.user.email }}</p>
+        <p class="contentParagraf">
+          State of origin: {{ service.user.stateOfOrigin }}
+        </p>
+        <p class="contentParagraf">
+          Jurassic Account: {{ service.user.jurassicAccount }}
+        </p>
+
+        <!-- <button (click)="proba()">Proba</button> -->
+      </div>
+    </div>
+    <div class="inputContainer">
+      <mat-toolbar class="toolbar">
+        <span>Change Username</span>
+        <span class="example-spacer"></span>
+      </mat-toolbar>
+      <form action="" [formGroup]="formUsername">
+        <div class="inputs">
+          <label for="username">Username</label>
+          <div [class]="'passwordSection'">
+            <input
+              id="username"
+              type="text"
+              formControlName="username"
+              placeholder="Username"
+              [class]="'inputi'"
+            />
+          </div>
+        </div>
+        <div class="inputs">
+          <button class="seeMore" (click)="changeUsername()">
+            Change Username
+          </button>
+        </div>
+    </form>
+    <form action="" [formGroup]="formPassword">
+        <mat-toolbar class="toolbar">
+          <span>Change Password</span>
+          <span class="example-spacer"></span>
+        </mat-toolbar>
+        <div class="inputs">
+          <label for="old">Old Password</label>
+          <div [class]="'passwordSection'">
+            <input
+              id="old"
+              [type]="passwordVisible ? 'text' : 'password'"
+              formControlName="old"
+              placeholder="Password"
+              [class]="'inputi'"
+            />
+            <mat-icon
+              [class]="'icon'"
+              (click)="passwordVisible = !passwordVisible"
+              >{{ passwordVisible ? "visibility" : "visibility_off" }}</mat-icon
+            >
+          </div>
+        </div>
+        <div class="inputs">
+          <label for="confirm">Confirm Password</label>
+          <div [class]="'passwordSection'">
+            <input
+              id="confirm"
+              [type]="passwordVisible2 ? 'text' : 'password'"
+              formControlName="confirm"
+              placeholder="Confirm Password"
+              [class]="'inputi'"
+            />
+            <mat-icon
+              [class]="'icon'"
+              (click)="passwordVisible2 = !passwordVisible2"
+              >{{
+                passwordVisible2 ? "visibility" : "visibility_off"
+              }}</mat-icon
+            >
+          </div>
+        </div>
+        <div class="inputs">
+          <button class="seeMore" (click)="changePassword()">
+            Change Password
+          </button>
+        </div>
+    </form>
+    <form action="" [formGroup]="formDelete">
+        <mat-toolbar class="toolbar">
+          <span>Delete Account</span>
+          <span class="example-spacer"></span>
+        </mat-toolbar>
+        <div class="inputs">
+          <label for="password">Your Password</label>
+          <div [class]="'passwordSection'">
+            <input
+              id="password"
+              [type]="passwordVisible3 ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Password"
+              [class]="'inputi'"
+            />
+            <mat-icon
+              [class]="'icon'"
+              (click)="passwordVisible3 = !passwordVisible3"
+              >{{
+                passwordVisible3 ? "visibility" : "visibility_off"
+              }}</mat-icon
+            >
+          </div>
+        </div>
+        <div class="inputs">
+          <button class="seeMore" (click)="deleteAccount()">
+            Delete Account
+          </button>
+        </div>
+    </form>
+    </div>
+  </div>
+
+    <ng-template #loading>
+        <div class="loadingContainer">
+        <mat-spinner [diameter]="50" [strokeWidth]="5"></mat-spinner>
+        </div>
+    </ng-template>
+</main>

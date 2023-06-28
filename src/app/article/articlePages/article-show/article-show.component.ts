@@ -26,16 +26,13 @@ export class ArticleShowComponent {
   originally bred for hunting.`;
 
   addPage() {
-    console.log(this.role);
     this.router.navigate(['/add-article']);
   }
 
   ngOnInit(): void {
     this.service.getArticles().subscribe((result: any) => {
-      console.log(result);
       this.service.articles = result;
       this.filteredArticles = result;
-      // this.reporters need to be result.ime and result.prezime distinct
       this.reporters = result
         .map((data: any) => {
           return { ime: data.ime, prezime: data.prezime, id: data.reporterId };
@@ -87,12 +84,3 @@ export class ArticleShowComponent {
     });
   }
 }
-
-// 1	Politics
-// 2	Entertainment
-// 3	Business
-// 4	Sports
-// 5	Crime
-// 6	Education
-// 7	City Council News
-// 8	Tech

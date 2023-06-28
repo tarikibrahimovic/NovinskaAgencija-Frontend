@@ -23,12 +23,18 @@ import { ArticleShowComponent } from './article/articlePages/article-show/articl
 import { ArticleAddComponent } from './article/articlePages/article-add/article-add.component';
 import { ArticleSingleComponent } from './article/articlePages/article-single/article-single.component';
 import { ArticleBuyComponent } from './article/articlePages/article-buy/article-buy.component';
+import { UserModule } from './user/user.module';
+import { UserShowComponent } from './user/user-show/user-show.component';
+import { UserLibraryComponent } from './user/user-library/user-library.component';
+import { UserBoughtComponent } from './user/user-bought/user-bought.component';
+import { ArticleSinglePersonalComponent } from './article/articlePages/article-single-personal/article-single-personal.component';
 
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent, ErrorPageComponent],
   imports: [
     ArticleModule,
+    UserModule,
     ForgotPasswordResetComponent,
     ForgotPasswordEmailComponent,
     VerifyPageComponent,
@@ -49,6 +55,21 @@ import { ArticleBuyComponent } from './article/articlePages/article-buy/article-
         component: ArticleShowComponent,
       },
       {
+        path: 'library',
+        component: UserLibraryComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'bought',
+        component: UserBoughtComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'articlePersonal/:id',
+        component: ArticleSinglePersonalComponent,
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'add-article',
         component: ArticleAddComponent,
         canActivate: [ReporterGuard],
@@ -56,12 +77,12 @@ import { ArticleBuyComponent } from './article/articlePages/article-buy/article-
       {
         path: 'login',
         component: LoginPageComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       {
         path: 'register',
         component: RegisterPageComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       {
         path: 'article/:id',
@@ -69,7 +90,8 @@ import { ArticleBuyComponent } from './article/articlePages/article-buy/article-
       },
       {
         path: 'articleBuy/:id',
-        component: ArticleBuyComponent
+        component: ArticleBuyComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'verify',
@@ -79,6 +101,10 @@ import { ArticleBuyComponent } from './article/articlePages/article-buy/article-
       {
         path: 'forgot-password-email',
         component: ForgotPasswordEmailComponent,
+      },
+      {
+        path: 'userInfo',
+        component: UserShowComponent,
       },
       {
         path: 'forgot-password-reset',

@@ -30,8 +30,10 @@
         Profile
       </button>
       <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="details()">User Details</button>
+        <button mat-menu-item (click)="library()">Library</button>
+        <button mat-menu-item (click)="bought()">Bought Articles</button>
         <button mat-menu-item (click)="logout()">Log Out</button>
-        <button mat-menu-item>Item 2</button>
       </mat-menu>
     </div>
     <div *ngIf="!(service.getLoginStatus() | async)">

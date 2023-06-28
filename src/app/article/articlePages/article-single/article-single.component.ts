@@ -14,14 +14,25 @@ export class ArticleSingleComponent {
 
   articleId = this.route.snapshot.paramMap.get('id') as string;
   article: any = {};
-  constructor(private route: ActivatedRoute, private service: CustomService, private router: Router) {
-    this.service.getArticle(this.articleId).subscribe((result: any) => {
-      this.article = result;
-    });
+  constructor(
+    private route: ActivatedRoute,
+    private service: CustomService,
+    private router: Router
+  ) {
+    this.service.getArticle(this.articleId).subscribe(
+      (result: any) => {
+        this.article = result;
+        if (this.article == null) {
+          this.router.navigate(['/error']);
+        }
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
-  linkIt(){
+  linkIt() {
     this.router.navigate(['/articleBuy/', this.articleId]);
   }
-
 }

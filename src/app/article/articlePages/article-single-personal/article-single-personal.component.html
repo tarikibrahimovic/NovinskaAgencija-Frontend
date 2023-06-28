@@ -1,0 +1,37 @@
+<main [class]="'main'">
+  <h1 [class]="'mainNaslov'">{{ article.title }}</h1>
+  <div>
+    <p [class]="'mainParagraf'">{{ article.ime }} {{ article.prezime }}</p>
+    <p [class]="'mainParagraf'">{{ article.publishDate.slice(0, 10) }}</p>
+  </div>
+  <div class="line"></div>
+  <!-- <button (click)="proba()">Proba</button> -->
+  <div class="content">
+    <div class="left">
+      <img
+        [src]="
+          article.imageUrl
+            ? article.imageUrl
+            : 'https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg'
+        "
+        alt=""
+        class="slikaMain"
+      />
+    </div>
+    <div class="right">
+      <p class="paragrafContent1">Price: {{ article.cena }}$</p>
+      <p
+        class="paragrafContent1"
+        [style]="article.fileUrl ? 'color: green' : 'color: red'"
+      >
+        Contains file: {{ article.fileUrl ? "Yes" : "No" }}
+      </p>
+      <p class="paragrafContent">Category: {{ article.name }}</p>
+      <div class="line"></div>
+      <h3 class="naslovContent">Title: {{ article.title }}</h3>
+      <p class="paragrafContent">Content: {{ article.content }}</p>
+
+      <button (click)="deleteArticle()" class="seeMore">Delete</button>
+    </div>
+  </div>
+</main>

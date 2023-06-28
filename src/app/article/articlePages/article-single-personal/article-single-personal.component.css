@@ -1,0 +1,84 @@
+.main {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+  }
+  
+  .mainNaslov {
+    margin: 3% 0;
+    font-size: 4rem;
+    font-weight: 700;
+  }
+  
+  .mainParagraf {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    opacity: 0.4;
+  }
+  
+  .line {
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    margin: 20px 0;
+  }
+  
+  .slikaMain {
+    width: 100%;
+    min-width: 300px;
+    max-width: 500px;
+  }
+  
+  .content {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .left {
+    width: 30%;
+  }
+  
+  .paragrafContent {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  
+  .naslovContent {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .paragrafContent1 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  
+  .seeMore {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    background-color: #0e4f8b;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 1020px) {
+    .content {
+      flex-direction: column;
+    }
+    .left {
+      width: 100%;
+    }
+    .right {
+      width: 100%;
+    }
+  }
+  

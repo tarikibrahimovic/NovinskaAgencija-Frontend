@@ -23,7 +23,6 @@ export class AuthGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): any {
-
     if (this.service.getLoginStatus()) {
       this.router.navigate(['/'])
       // return false;

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { UserShowComponent } from './user-show/user-show.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -8,17 +9,19 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ArticleAddComponent } from './articlePages/article-add/article-add.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ArticleShowComponent } from './articlePages/article-show/article-show.component';
-import { ArticleSingleComponent } from './articlePages/article-single/article-single.component';
-import { ArticleBuyComponent } from './articlePages/article-buy/article-buy.component';
-import { ArticleSinglePersonalComponent } from './articlePages/article-single-personal/article-single-personal.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { UserLibraryComponent } from './user-library/user-library.component';
+import { UserBoughtComponent } from './user-bought/user-bought.component';
 
 @NgModule({
-  declarations: [ArticleShowComponent, ArticleAddComponent, ArticleSingleComponent, ArticleBuyComponent, ArticleSinglePersonalComponent],
+  declarations: [
+    UserShowComponent,
+    UserLibraryComponent,
+    UserBoughtComponent
+  ],
   imports: [
     CommonModule,
     MatTabsModule,
@@ -32,7 +35,8 @@ import { ArticleSinglePersonalComponent } from './articlePages/article-single-pe
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatCardModule
-  ],
+    MatCardModule,
+    MatDialogModule
+  ]
 })
-export class ArticleModule {}
+export class UserModule { }
