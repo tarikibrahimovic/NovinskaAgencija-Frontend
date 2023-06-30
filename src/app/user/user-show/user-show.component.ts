@@ -22,13 +22,14 @@ export class UserShowComponent {
     public dialog: MatDialog,
     private router: Router
   ) {
-    if (this.service.user == null) {
-      this.router.navigate(['/login']);
-    } else {
-      this.service.username.subscribe((result: any) => {
-        this.username = result;
-      });
-    }
+    // if (this.service.user == null) {
+    //   this.router.navigate(['/login']);
+    // } else {
+    //   this.service.username.subscribe((result: any) => {
+    //     this.username = result;
+    //   });
+    // }
+    this.username = localStorage.getItem('username') as string;
   }
 
   formUsername = new FormGroup({
@@ -50,11 +51,11 @@ export class UserShowComponent {
   isLoading = false;
   username = '';
 
-  proba(){
+  proba() {
     console.log(this.service.user.imageUrl);
   }
 
-  deleteImage(){
+  deleteImage() {
     this.isLoading = true;
     this.service.deleteImage().subscribe(
       (result: any) => {
@@ -110,10 +111,14 @@ export class UserShowComponent {
       .changeUsername(this.formUsername.value.username as string)
       .subscribe(
         (result: any) => {
-          console.log(result);
           this.service.user.username = result.username;
-          this.service.setUsername(result.username);
+          this.service.setUsername(this.formUsername.value.username as string);
           this.router.navigate(['/']);
+          localStorage.setItem(
+            'username',
+            this.formUsername.value.username as string
+          );
+          this.username = this.formUsername.value.username as string;
           this.formUsername.value.username = '';
           this.isLoading = false;
         },
@@ -126,16 +131,19 @@ export class UserShowComponent {
 
   deleteAccount() {
     if (confirm('Are you sure you want to delete your account?')) {
+      console.log("prosle");
       this.isLoading = true;
       this.service
         .deleteAccount(this.formDelete.value.password as string)
         .subscribe(
           (result: any) => {
+            console.log(result);
             this.isLoading = false;
             localStorage.removeItem('jwt');
             localStorage.removeItem('email');
             this.service.user = null;
             this.service.setLoginStatus(false);
+            this.service.setUsername('');
             this.service.setRole(-1);
             this.router.navigate(['/login']);
           },
@@ -168,7 +176,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   template: `
     <h1 mat-dialog-title>Upload Image</h1>
     <div mat-dialog-content>
-      <form [formGroup]="form" *ngIf="!isLoading else proba">
+      <form [formGroup]="form" *ngIf="!isLoading; else proba">
         <input type="file" formControlName="image" (change)="change($event)" />
       </form>
       <ng-template #proba>
@@ -177,14 +185,32 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     </div>
     <div mat-dialog-actions>
       <button mat-button mat-dialog-close [disabled]="isLoading">No</button>
-      <button mat-button mat-dialog-close cdkFocusInitial (click)="submit()" [disabled]="isLoading">Ok</button>
+      <button
+        mat-button
+        mat-dialog-close
+        cdkFocusInitial
+        (click)="submit()"
+        [disabled]="isLoading"
+      >
+        Ok
+      </button>
     </div>
   `,
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule, ReactiveFormsModule, CommonModule, MatProgressSpinnerModule],
+  imports: [
+    MatDialogModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MatProgressSpinnerModule,
+  ],
 })
 export class DialogAnimationsExampleDialog {
-  constructor(public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>, private service: CustomService, private router: Router) {}
+  constructor(
+    public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>,
+    private service: CustomService,
+    private router: Router
+  ) {}
 
   form = new FormGroup({
     image: new FormControl(''),
@@ -201,26 +227,29 @@ export class DialogAnimationsExampleDialog {
     this.image = file;
   }
 
-  submit(){
-    if(this.image == null){
-      alert("Please select an image!");
+  submit() {
+    if (this.image == null) {
+      alert('Please select an image!');
       return;
     }
     //if the file is not an image
-    if(this.image.type.split('/')[0] !== 'image'){
-      alert("Please select an image!");
+    if (this.image.type.split('/')[0] !== 'image') {
+      alert('Please select an image!');
       return;
     }
     this.isLoading = true;
-    this.service.uploadPicture(this.image).subscribe((result: any) => {
-      this.isLoading = false;
-      alert("Image uploaded!");
-      this.service.user.image = result.image;
-      this.dialogRef.close();
-      this.router.navigate(['/']);
-    }, (error) => {
-      this.isLoading = true;
-      alert("Something went wrong!");
-    });
+    this.service.uploadPicture(this.image).subscribe(
+      (result: any) => {
+        this.isLoading = false;
+        alert('Image uploaded!');
+        this.service.user.imageUrl = result.pictureUrl;
+        this.dialogRef.close();
+        this.router.navigate(['/']);
+      },
+      (error) => {
+        this.isLoading = true;
+        alert('Something went wrong!');
+      }
+    );
   }
 }

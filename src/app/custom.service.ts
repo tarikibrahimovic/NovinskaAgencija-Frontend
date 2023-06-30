@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
+// import {environment} from "../environments/environment";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CustomService {
+  // url = environment.apiUrl;
+  url = 'https://newsly.bsite.net/api';
   user: any = {};
   public isLoggedIn: Subject<boolean>;
   forgotEmail = '';
@@ -43,17 +47,18 @@ export class CustomService {
     this.isLoggedIn = new Subject<boolean>();
     this.role = new BehaviorSubject<number>(-1);
     this.username = new BehaviorSubject<string>('');
+    console.log(environment);
   }
 
   login(email: string, password: string) {
-    return this.http.post('https://localhost:7121/api/Auth/login', {
+    return this.http.post(`${this.url}/Auth/login`, {
       email: email,
       password: password,
     });
   }
 
   signUpKlijent(value: any) {
-    return this.http.post('https://localhost:7121/api/Auth/registerKlijent', {
+    return this.http.post(`${this.url}/Auth/registerKlijent`, {
       username: value.username,
       password: value.password,
       email: value.email,
@@ -65,7 +70,7 @@ export class CustomService {
   }
 
   signUpReporter(value: any) {
-    return this.http.post('https://localhost:7121/api/Auth/registerReporter', {
+    return this.http.post(`${this.url}/Auth/registerReporter`, {
       username: value.username,
       email: value.email,
       password: value.password,
@@ -77,7 +82,7 @@ export class CustomService {
   }
 
   verifyAccount(token: string) {
-    return this.http.post('https://localhost:7121/api/Auth/verify', {
+    return this.http.post(`${this.url}/Auth/verify`, {
       token: token,
       email: this.user.email,
     });
@@ -85,7 +90,7 @@ export class CustomService {
 
   resendVerification() {
     return this.http.post(
-      'https://localhost:7121/api/Auth/resendVerificationEmail',
+      `${this.url}/Auth/resendVerificationEmail`,
       {
         email: this.user.email,
       }
@@ -93,7 +98,7 @@ export class CustomService {
   }
 
   refresh(token: string) {
-    return this.http.get('https://localhost:7121/api/user/refreshToken', {
+    return this.http.get(`${this.url}/user/refreshToken`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -101,13 +106,13 @@ export class CustomService {
   }
 
   forgotPasswordEmail(email: string) {
-    return this.http.post('https://localhost:7121/api/Auth/forgotPassword', {
+    return this.http.post(`${this.url}/Auth/forgotPassword`, {
       email: email,
     });
   }
 
   forgotPassword(token: string, password: string) {
-    return this.http.post('https://localhost:7121/api/Auth/resetPassword', {
+    return this.http.post(`${this.url}/Auth/resetPassword`, {
       token: token,
       email: this.forgotEmail,
       password: password,
@@ -115,7 +120,7 @@ export class CustomService {
   }
 
   getArticles() {
-    return this.http.get('https://localhost:7121/api/article/articles');
+    return this.http.get(`${this.url}/article/articles`);
   }
 
   addArticle(value: any, image: File | null, file: File | null) {
@@ -127,7 +132,7 @@ export class CustomService {
     if (image != null) formData.append('Image', image);
     if (file != null) formData.append('File', file);
     return this.http.post(
-      'https://localhost:7121/api/article/addArticle',
+      `${this.url}/article/addArticle`,
       formData,
       {
         headers: {
@@ -138,12 +143,12 @@ export class CustomService {
   }
 
   getArticle(id: string) {
-    return this.http.get(`https://localhost:7121/api/article/getArticle/${id}`);
+    return this.http.get(`${this.url}/article/getArticle/${id}`);
   }
 
   buyArticle(id: string, jurassicAccount: string) {
     return this.http.post(
-      `https://localhost:7121/api/article/buyArticle`,
+      `${this.url}/article/buyArticle`,
       {
         ArticleId: parseInt(id),
         JurassicAccount: jurassicAccount,
@@ -158,7 +163,7 @@ export class CustomService {
 
   changeUsername(username: string) {
     return this.http.post(
-      'https://localhost:7121/api/user/changeUsername',
+      `${this.url}/user/changeUsername`,
       {
         username: username,
       },
@@ -172,7 +177,7 @@ export class CustomService {
 
   changePassword(password: string, oldPassword: string) {
     return this.http.post(
-      'https://localhost:7121/api/user/changePassword',
+      `${this.url}/user/changePassword`,
       {
         password: password,
         oldPassword: oldPassword,
@@ -189,7 +194,7 @@ export class CustomService {
     const formData = new FormData();
     formData.append('ProfilePicture', image);
     return this.http.post(
-      'https://localhost:7121/api/user/profileImage',
+      `${this.url}/user/profileImage`,
       formData,
       {
         headers: {
@@ -201,7 +206,7 @@ export class CustomService {
 
   deleteImage() {
     return this.http.delete(
-      'https://localhost:7121/api/user/deleteProfileImage',
+      `${this.url}/user/deleteProfileImage`,
       {
         headers: {
           Authorization: 'Bearer ' + this.user.token,
@@ -212,7 +217,7 @@ export class CustomService {
 
   deleteAccount(password: string) {
     return this.http.post(
-      'https://localhost:7121/api/user/deleteProfile',
+      `${this.url}/user/deleteProfile`,
       {
         password: password,
       },
@@ -225,15 +230,15 @@ export class CustomService {
   }
 
   getBoughtArticles() {
-    return this.http.get('https://localhost:7121/api/article/boughtArticles', {
+    return this.http.get(`${this.url}/article/boughtArticles`, {
       headers: {
         Authorization: 'Bearer ' + this.user.token,
       },
     });
   }
 
-  getReportersArticles(){
-    return this.http.get('https://localhost:7121/api/article/usersArticles', {
+  getReportersArticles() {
+    return this.http.get(`${this.url}/article/usersArticles`, {
       headers: {
         Authorization: 'Bearer ' + this.user.token,
       },
@@ -242,7 +247,7 @@ export class CustomService {
 
   getPersonalArticles(id: string) {
     return this.http.get(
-      `https://localhost:7121/api/article/personalArticles/${id}`,
+      `${this.url}/article/personalArticles/${id}`,
       {
         headers: {
           Authorization: 'Bearer ' + this.user.token,
@@ -253,7 +258,7 @@ export class CustomService {
 
   deleteArticle(id: string) {
     return this.http.delete(
-      `https://localhost:7121/api/article/deleteArticle/${id}`,
+      `${this.url}/article/deleteArticle/${id}`,
       {
         headers: {
           Authorization: 'Bearer ' + this.user.token,

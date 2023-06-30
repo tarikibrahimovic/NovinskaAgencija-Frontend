@@ -32,6 +32,7 @@ export class ArticleShowComponent {
   ngOnInit(): void {
     this.service.getArticles().subscribe((result: any) => {
       this.service.articles = result;
+      console.log(result);
       this.filteredArticles = result;
       this.reporters = result
         .map((data: any) => {

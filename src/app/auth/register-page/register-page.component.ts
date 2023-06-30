@@ -54,6 +54,7 @@ export class RegisterPageComponent implements OnInit {
   passwordVisible1 = false;
   passwordVisible2 = false;
   error = false;
+  pom = '';
 
   signup() {
     if (this.form.value.password !== this.form.value.confirmPassword) {
@@ -64,11 +65,16 @@ export class RegisterPageComponent implements OnInit {
       alert('Tip preduzeca is required!');
       this.error = true;
       return;
+    }
+    this.pom = this.form.value.password as string;
+    if (this.pom.length < 8) {
+      alert('Password must be at least 8 characters long!');
+      this.error = true;
+      return;
     } else if (this.form.value.tip === 'reporter') {
       this.service.signUpReporter(this.form.value).subscribe(
         (response) => {
           this.router.navigate(['/login']);
-
         },
         (error) => {
           this.error = true;

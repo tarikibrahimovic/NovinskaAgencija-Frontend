@@ -96,7 +96,7 @@ import { ArticleSinglePersonalComponent } from './article/articlePages/article-s
       {
         path: 'verify',
         component: VerifyPageComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       {
         path: 'forgot-password-email',

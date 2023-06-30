@@ -27,8 +27,27 @@ export class VerifyPageComponent {
   verify() {
     this.service.verifyAccount(this.form.value.token as string).subscribe(
       (result: any) => {
+        console.log(result);
+        localStorage.setItem('jwt', result.token);
+        localStorage.setItem('email', result.email);
+        localStorage.setItem('username', result.username);
+        this.service.setLoginStatus(true);
+        this.service.setRole(result.role);
+        this.service.setUsername(result.username);
         this.service.user = result;
         this.route.navigate(['/']);
+        // localStorage.setItem('email', result.email);
+        //   localStorage.setItem('username', result.username);
+        //   this.service.user=result;
+        //   this.service.setRole(result.role);
+        //   if (result.isVerified){
+        //     localStorage.setItem('jwt', result.token);
+        //     this.route.navigate(['/']);
+        //     this.service.setLoginStatus(true);
+        //   }
+        //   else{
+        //     this.route.navigate(['/verify']);
+        //   }
       },
       (error) => {
         this.error = true;

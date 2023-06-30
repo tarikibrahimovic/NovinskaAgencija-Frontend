@@ -14,10 +14,11 @@ export class UserBoughtComponent {
     });
     setTimeout(() => {
     this.service.getBoughtArticles().subscribe((result: any) => {
+      // console.log(this.service.user.clanci.$values);
       this.filteredArticles = result.$values;
-
+      console.log(this.filteredArticles);
     });
-    }, 500);
+    }, 1500);
   }
   category = '';
   reporters: any = [];

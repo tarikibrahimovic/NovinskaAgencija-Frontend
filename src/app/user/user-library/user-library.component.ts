@@ -19,7 +19,7 @@ export class UserLibraryComponent {
       this.filteredArticles = result.$values;
 
     });
-    }, 500);
+    }, 1500);
   }
   category = '';
   reporters: any = [];

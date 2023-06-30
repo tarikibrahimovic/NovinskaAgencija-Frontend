@@ -33,13 +33,15 @@ export class LoginPageComponent {
       )
       .subscribe(
         (result: any) => {
+          localStorage.setItem('email', result.email);
+          localStorage.setItem('username', result.username);
+          this.service.user=result;
+          this.service.setRole(result.role);
           if (result.isVerified){
             localStorage.setItem('jwt', result.token);
-            localStorage.setItem('email', result.email);
-            this.service.user=result;
             this.route.navigate(['/']);
             this.service.setLoginStatus(true);
-            this.service.setRole(result.role);
+            this.service.setUsername(result.username);
           }
           else{
             this.route.navigate(['/verify']);

@@ -11,14 +11,19 @@ export class AppComponent {
   showNavbar = true;
   role = -1;
   username = '';
+  email = '';
 
-  constructor(private router: Router, public service: CustomService) {
+  constructor(public router: Router, public service: CustomService) {
+    setTimeout(() => {
     this.service.getRole().subscribe((result: any) => {
       this.role = result;
     });
     this.service.getUsername().subscribe((result: any) => {
       this.username = result;
+      console.log(result);
     });
+    this.email = localStorage.getItem('email') as string;
+    }, 1500);
   }
 
   ngOnInit() {
@@ -39,10 +44,12 @@ export class AppComponent {
       this.service.refresh(localStorage.getItem('jwt') as string).subscribe((result: any) => {
         this.service.user = result;
         this.service.setUsername(result.username);
+        localStorage.setItem('username', result.username);
         this.service.setLoginStatus(true);
         this.service.setRole(result.role);
       });
     }
+    console.log(this.username);
   }
 
   logout() {

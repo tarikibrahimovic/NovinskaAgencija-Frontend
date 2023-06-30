@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CustomService } from 'src/app/custom.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class ArticleBuyComponent {
     jurassicAccount: new FormControl('', [Validators.required]),
   });
 
-  constructor(private service: CustomService, private route: ActivatedRoute) {}
+  constructor(private service: CustomService, private route: ActivatedRoute, private router:Router) {}
 
   buy() {
     if (this.forms.invalid) {
@@ -34,11 +34,14 @@ export class ArticleBuyComponent {
       .buyArticle(this.articleId, this.forms.value.jurassicAccount as string)
       .subscribe(
         (result: any) => {
+          alert('Article bought successfully!');
+          console.log(result);
+          this.router.navigate(['/']);
           this.service.articles = result;
           this.isLoading = false;
         },
         (error: any) => {
-          this.error = error.error;
+          this.error = error.error.error;
           this.isLoading = false;
         }
       );

@@ -12,18 +12,20 @@ export class AuthGuard {
    *
    */
   loggedIn = false;
+  token = '';
   constructor(private service: CustomService, private router: Router) {
     this.service.isLoggedIn.subscribe((value) => {
       this.loggedIn = value;
     }
     );
+    this.token = localStorage.getItem('jwt') as string;
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): any {
-    if (this.service.getLoginStatus()) {
+    if (this.token == null) {
       this.router.navigate(['/'])
       // return false;
     } else {

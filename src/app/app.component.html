@@ -20,7 +20,7 @@
         >
       </div>
     </div>
-    <div class="" *ngIf="service.getLoginStatus() | async">
+    <div class="" *ngIf="username">
       <button
         mat-button
         [matMenuTriggerFor]="menu"
@@ -31,12 +31,14 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="details()">User Details</button>
-        <button mat-menu-item (click)="library()">Library</button>
+        <div *ngIf="role == 0">
+          <button mat-menu-item (click)="library()">Library</button>
+        </div>
         <button mat-menu-item (click)="bought()">Bought Articles</button>
         <button mat-menu-item (click)="logout()">Log Out</button>
       </mat-menu>
     </div>
-    <div *ngIf="!(service.getLoginStatus() | async)">
+    <div *ngIf="!username">
       <button
         mat-button
         [class]="'authButtons'"
@@ -61,7 +63,7 @@
   <footer *ngIf="showNavbar">
     <div [class]="'footerContainer'">
       <div [class]="'footerSection'">
-        <img src="../assets/NewslyLogo.png" [class]="'footerImg'" alt="">
+        <img src="../assets/NewslyLogo.png" [class]="'footerImg'" alt="" />
         <h2>Newsly</h2>
       </div>
       <div [class]="'footerSection'">

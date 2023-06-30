@@ -26,7 +26,7 @@ export class ArticleSinglePersonalComponent {
         // console.log(error);
         this.router.navigate(['/library'])
       };
-    }, 1000);
+    }, 1500);
   }
 
   article: any = {};
@@ -35,17 +35,21 @@ export class ArticleSinglePersonalComponent {
   isLoading = false;
 
   deleteArticle() {
-    // this.router.navigate(['/articleBuy/', this.articleId]);
-    // console.log("radi");
     this.service.deleteArticle(this.articleId).subscribe((result: any) => {
-      this.service.user.articles = this.service.user.clanci.$values.filter(
+      alert('Article deleted successfully!');
+      if(this.service.user.clanci !== null && this.service.user.clanci !== undefined){
+      this.service.user.clanci = this.service.user.clanci.$values.filter(
         (data: any) => {
           return data.id != this.articleId;
         }
       );
-      console.log(this.service.user.clanci.$values);
-      console.log(result);
+      // console.log(this.service.user.clanci.$values);
+      // console.log(result);
       this.router.navigate(['/library']);
+      }
+      else{
+        this.router.navigate(['/bought']);
+      }
     }, (error: any) => {
       console.log(error.error.error);
       alert(error.error.error);
