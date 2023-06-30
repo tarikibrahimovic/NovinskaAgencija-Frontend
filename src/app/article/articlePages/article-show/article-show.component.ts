@@ -61,7 +61,6 @@ export class ArticleShowComponent {
     this.filteredArticles = this.service.articles.filter((data: any) => {
       return data.name == value;
     });
-    console.log(this.filteredArticles);
   }
 
   categories = [
@@ -79,9 +78,11 @@ export class ArticleShowComponent {
     this.router.navigate(['article', id]);
   }
 
-  changeReporter(id: number) {
+  changeReporter(id: string) {
+    console.log(id);
     this.filteredArticles = this.service.articles.filter((data: any) => {
-      return data.reporterId == id && data.name == this.category;
+      return data.reporterId == id;
     });
+    console.log(this.filteredArticles);
   }
 }

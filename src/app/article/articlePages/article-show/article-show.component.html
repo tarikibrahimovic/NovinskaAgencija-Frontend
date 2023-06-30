@@ -14,8 +14,8 @@
       </button>
           <mat-form-field>
             <mat-label>Choose an option</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let reporter of reporters" [value]="reporter.id" (onSelectionChange)="changeReporter(reporter.id)">{{reporter.ime}} {{reporter.prezime}}</mat-option>
+            <mat-select (selectionChange)="changeReporter($event.value)">
+              <mat-option *ngFor="let reporter of reporters" [value]="reporter.id">{{reporter.ime}} {{reporter.prezime}}</mat-option>
             </mat-select>
           </mat-form-field>
     </mat-toolbar>

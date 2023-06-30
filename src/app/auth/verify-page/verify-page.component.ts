@@ -28,6 +28,7 @@ export class VerifyPageComponent {
     this.service.verifyAccount(this.form.value.token as string).subscribe(
       (result: any) => {
         console.log(result);
+        console.log(this.service.user);
         localStorage.setItem('jwt', result.token);
         localStorage.setItem('email', result.email);
         localStorage.setItem('username', result.username);
@@ -65,7 +66,7 @@ export class VerifyPageComponent {
     let interval = setInterval(() => {
       time--;
       this.countdown = time.toString();
-      if (time == 0) {
+      if (time == 0 || this.countdown == 'Resend Email') {
         clearInterval(interval);
         this.countdown = 'Resend Email';
       }

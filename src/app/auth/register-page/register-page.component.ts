@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { CustomService } from '../../custom.service';
 import { Router } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-register-page',
@@ -25,6 +26,7 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatCheckboxModule,
     CommonModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class RegisterPageComponent implements OnInit {
@@ -54,6 +56,7 @@ export class RegisterPageComponent implements OnInit {
   passwordVisible1 = false;
   passwordVisible2 = false;
   error = false;
+  isLoading = false;
   pom = '';
 
   signup() {
@@ -72,24 +75,27 @@ export class RegisterPageComponent implements OnInit {
       this.error = true;
       return;
     } else if (this.form.value.tip === 'reporter') {
+      this.isLoading = true;
       this.service.signUpReporter(this.form.value).subscribe(
         (response) => {
+          this.isLoading = false;
           this.router.navigate(['/login']);
         },
         (error) => {
           this.error = true;
-          console.log(error);
+          this.isLoading = false;
           alert('Something went wrong!');
         }
       );
     } else if (this.form.value.tip === 'klijent') {
       this.service.signUpKlijent(this.form.value).subscribe(
         (response) => {
+          this.isLoading = false;
           this.router.navigate(['/login']);
         },
         (error) => {
           this.error = true;
-          console.log(error);
+          this.isLoading = false;
           alert('Something went wrong!');
         }
       );

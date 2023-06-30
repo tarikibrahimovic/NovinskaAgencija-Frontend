@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class CustomService {
   // url = environment.apiUrl;
   url = 'https://newsly.bsite.net/api';
+  // url = 'https://localhost:7121/api';
   user: any = {};
   public isLoggedIn: Subject<boolean>;
   forgotEmail = '';
